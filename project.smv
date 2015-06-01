@@ -1,0 +1,52 @@
+MODULE main
+
+VAR
+
+light1: { detected, green, red };
+
+light2: { detected, green, red };
+
+road1: { empty, appears, passing, waiting };
+
+road2: { empty, appears, passing, waiting };
+
+ASSIGN
+
+next(light1) := case
+                 road1 = appears : detected;
+                 light1 = detected: {green, red};
+                 light1 = green & road1 = passing: green;
+                 light1 = green & !(road2 = waiting): green;
+                 light1 = green: red;
+                 light1 = red : {detected, green};
+                esac;
+
+
+next(light2) := case
+                 road2 = appears : detected;
+                 light2 = detected : green;
+                 light2 = green & road2 = passing: green;
+                 light2 = green & !(road1 = waiting): green;
+                 light2 = green: red;
+                 light2 = red : {detected, green};
+                esac;
+
+next(road1) := case
+                road1 = empty : {empty, appears};
+                road1 = appears : {passing, waiting};
+                road1 = waiting : {waiting, passing};
+                road1 = passing : {empty, appears};
+               esac;
+
+
+next(road2) := case
+                road1 = empty : {empty, appears};
+                road1 = appears : {passing, waiting};
+                road1 = waiting : {waiting, passing};
+                road1 = passing : {empty, appears};
+               esac;
+
+
+SPEC
+
+AG!((light1 = green) & (light2 = green))
