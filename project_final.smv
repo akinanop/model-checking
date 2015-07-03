@@ -1,0 +1,33 @@
+MODULE main
+VAR
+we :  controller(ns.state,ns.green);
+ns :  controller(we.state,we.green);
+ASSIGN
+init(ns.green) := TRUE;
+init(we.green) := FALSE;
+SPEC
+AG (we.state = waiting -> AF we.state = passing)
+SPEC
+AG (ns.state = waiting -> AF ns.state = passing)
+SPEC
+AG !(ns.green = TRUE & we.green = TRUE)
+MODULE controller(other_state,other_green)
+VAR
+state : {detected,waiting,passing};
+green : boolean;
+ASSIGN
+next(state) :=
+case
+  state in {detected,waiting} & green : passing;
+  state in {detected,waiting} & !green: waiting;
+  state = passing : detected;
+esac;
+next(green) :=
+case
+  state = detected & other_state in {detected,waiting} & other_green : FALSE;
+  state = detected : TRUE;
+  state = passing & other_state = passing & other_green : TRUE;
+  state = passing : FALSE;
+  state = waiting & other_state in {detected,waiting} & other_green: FALSE;
+  state = waiting : TRUE;
+esac;
