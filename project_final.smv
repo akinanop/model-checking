@@ -11,6 +11,19 @@ SPEC
 AG (ns.state = waiting -> AF ns.state = passing)
 SPEC
 AG !(ns.green = TRUE & we.green = TRUE)
+SPEC
+AG !(ns.state = passing & we.state = passing)
+SPEC
+AG (we.state = waiting & ns.state = waiting -> AX (we.state = passing | ns.state = passing) )
+SPEC
+AG AF (we.green = TRUE)
+SPEC
+AG !(ns.state = passing & we.green = TRUE )
+SPEC
+AG (ns.state = waiting -> A [ns.state = waiting U ns.green = TRUE ])
+SPEC
+EF (we.green = FALSE & we.state = passing)
+
 MODULE controller(other_state,other_green)
 VAR
 state : {detected,waiting,passing};
