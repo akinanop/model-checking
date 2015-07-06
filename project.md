@@ -2,7 +2,7 @@
 <h2> Formal Methods Project: "Crossroads" </h2>
 <h5> Nika Pona, EMCL 2014/2015, ID: 13025 </h5>
 
-I chose to model the traffic lights controller specified in the attached file *crossroads.pdf*. My program is contained in the file *project.smv*. It consists of two modules: the obligatory **main** module and the **controller** module called from **main** to create states that model West-East (*we*) and North-East (*ns*) controllers respectively. Intuitively, each controller is a function from other road's state and their traffic lights. It represents the possible situations on each road.  
+I chose to model the traffic lights controller specified in the attached file *crossroads.pdf*. My program is contained in the file *project.smv*. It consists of two modules: the obligatory **main** module and the **controller** module called from **main** to create states that specify West-East (*we*) and North-East (*ns*) controllers respectively. Intuitively, each controller is a function from other road's state and their traffic lights that represents the possible situations on each road.  
 
 ~~~prolog
 MODULE main
@@ -14,7 +14,8 @@ init(ns.green) := TRUE;
 init(we.green) := FALSE;
 ~~~
 
-In the module **controller** I define the possible states of the road and traffic lights following the specifications. This program is quite modular: if desired one can easily add other states representing other possible states of the road.
+In the module **controller** I define the possible states of the road and traffic lights following the specifications. This program is quite modular: if desired one can easily add other states representing further possible states of the road.
+
 ~~~prolog
 
 MODULE controller(other_state,other_green)
@@ -64,7 +65,7 @@ AG !(ns.green = TRUE & we.green = TRUE)
 ```prolog
 AG (we.state = waiting & ns.state = waiting -> AX (we.state = passing | ns.state = passing) )
 ```
-* Light will not red all the time:
+* Light will not be red all the time:
 
 ```prolog
 AG AF (we.green = TRUE)
