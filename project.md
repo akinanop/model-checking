@@ -1,5 +1,5 @@
 
-<h2> Formal Methods Project: *Crossroads* </h2>
+<h2> Formal Methods Project: "Crossroads" </h2>
 <h5> Nika Pona, EMCL 2014/2015, ID: 13025 </h5>
 
 I chose to model the traffic lights controller specified in the attached file *crossroads.pdf*. My program is contained in the file *project.smv*. It consists of two modules: the obligatory **main** module and the **controller** module called from **main** to create states that model West-East (*we*) and North-East (*ns*) controllers respectively. Intuitively, each controller is a function from other road's state and their traffic lights. It represents the possible situations on each road.  
