@@ -1,8 +1,7 @@
 
 <h2> Formal Methods Project: "Crossroads" </h2>
-<h5> Nika Pona, EMCL 2014/2015, ID: 13025 </h5>
 
-I chose to model the traffic lights controller specified in the attached file *crossroads.pdf*. My program is contained in the file *project.smv*. It consists of two modules: the obligatory **main** module and the **controller** module called from **main** to create states that specify West-East (*we*) and North-East (*ns*) controllers respectively. Intuitively, each controller is a function from other road's state and their traffic lights that represents the possible situations on each road.  
+I model the traffic lights controller specified in the attached file *crossroads.pdf*. My smv program (http://www.cs.cmu.edu/~modelcheck/smv.html) is contained in the file *project.smv*. It consists of two modules: the obligatory **main** module and the **controller** module called from **main** to create states that specify West-East (*we*) and North-East (*ns*) controllers respectively. Intuitively, each controller is a function from other road's state and their traffic lights that represents the possible situations on each road.  
 
 ~~~prolog
 MODULE main
