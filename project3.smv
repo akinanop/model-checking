@@ -1,3 +1,0 @@
-MODULE road1(road2_state)
-
-car : {pass, wait};
